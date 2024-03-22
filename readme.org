@@ -1,0 +1,58 @@
+*** Introduction
+- ``The key to comprehending pointers is understanding how memory is
+  managed in a C program.''
+
+
+  |                   | Scope                                                 | Lifetime                        |
+  |-------------------+-------------------------------------------------------+---------------------------------|
+  | Global            | The entire file                                       | The lifetime of the application |
+  |-------------------+-------------------------------------------------------+---------------------------------|
+  | Static            | The function it is declared within                    | The lifetime of the application |
+  |-------------------+-------------------------------------------------------+---------------------------------|
+  | Automatic (local) | The function it is declared within                    | While the function is executing |
+  |-------------------+-------------------------------------------------------+---------------------------------|
+  | Dynamic           | Determined by the pointers that reference this memory | Until the memory is freed       |
+  |-------------------+-------------------------------------------------------+---------------------------------|
+
+- ``The asterisk is an overloaded symbol as it is also used for
+  multiplication and dereferencing a pointer''
+
+- Author shows this example:
+
+  #+begin_src C
+    #include <stdio.h>
+
+    int main (void) {
+      int num = 5;
+      int *pi = &num;
+
+      printf("%d\n", num); // 5
+      printf("%p\n", pi); // 0x...
+
+      *pi = 10;
+
+      printf("%d\n", num); // 10!
+
+      return 0;
+    }
+  #+end_src
+
+  Here is my comment.  (I'm using single quotes to mention an
+  expression as opposed to using it.)
+
+  The expression 'int num = 5' makes it the case that a 5 object is
+  now somewhere in memory at a certain address, let's say 111, and
+  that 'num' is the name of the object that lives at
+  address 111. Given that location at address 111 is occupied by 5, it
+  is /now/ true that num is 5.
+
+  The expression 'int *pi = &num' makes it the case that the address
+  of num is now somewhere in memory at a certain address, let's say
+  222, and that 'pi' is the name of the object that lives at
+  address 222. Given that the location at 222 is occupied by a 111, it
+  is /now/ true that pi is 111. Moreover, the expression 'int *pi =
+  &num' makes it the case that *pi is whatever object at the pi
+  address. Given that pi is 111, *pi is whatever object lives at
+  address 111. The location at 111 is occupied by 5, so *pi is 5.
+  '*pi' is the name for whatever object..., exactly like num. So *pi
+  is num.
