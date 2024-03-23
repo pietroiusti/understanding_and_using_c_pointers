@@ -2,7 +2,6 @@
 - ``The key to comprehending pointers is understanding how memory is
   managed in a C program.''
 
-
   |                   | Scope                                                 | Lifetime                        |
   |-------------------+-------------------------------------------------------+---------------------------------|
   | Global            | The entire file                                       | The lifetime of the application |
@@ -18,7 +17,6 @@
   multiplication and dereferencing a pointer''
 
 - Author shows this example:
-
   #+begin_src C
     #include <stdio.h>
 
@@ -42,17 +40,25 @@
 
   The expression 'int num = 5' makes it the case that a 5 object is
   now somewhere in memory at a certain address, let's say 111, and
-  that 'num' is the name of the object that lives at
-  address 111. Given that location at address 111 is occupied by 5, it
+  that 'num' is the name of the object that lives at that
+  address. Given that the location at address 111 is occupied by 5, it
   is /now/ true that num is 5.
 
   The expression 'int *pi = &num' makes it the case that the address
-  of num is now somewhere in memory at a certain address, let's say
-  222, and that 'pi' is the name of the object that lives at
-  address 222. Given that the location at 222 is occupied by a 111, it
+  of num (111) is now somewhere in memory at a certain address, let's
+  say 222, and that 'pi' is the name of the object that lives at
+  address 222. Given that the location at 222 is occupied by 111, it
   is /now/ true that pi is 111. Moreover, the expression 'int *pi =
-  &num' makes it the case that *pi is whatever object at the pi
-  address. Given that pi is 111, *pi is whatever object lives at
-  address 111. The location at 111 is occupied by 5, so *pi is 5.
-  '*pi' is the name for whatever object..., exactly like num. So *pi
-  is num.
+  &num' makes it the case that '*pi' is the name of whatever object
+  lives at the pi address. Given that pi is 111, *pi is whatever
+  object lives at address 111. The location at 111 is occupied by 5,
+  so *pi is 5.
+
+  '*pi' is the name for whatever object lives at 111, exactly like
+  num. So *pi and num are synonimous; *pi is num.
+
+- Author shows the usage of ~const~:
+  - pointers to constants
+  - constant pointers to nonconstants
+  - constant pointers to constants
+  - pointer to (constant pointer to constant)
